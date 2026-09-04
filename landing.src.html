@@ -1,0 +1,823 @@
+<title>Haimirex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:#F6F4EF;
+    --surface:#FFFFFF;
+    --surface-2:#F0EDE6;
+    --ink:#1B1B24;
+    --ink-soft:#585863;
+    --ink-faint:#8E8E99;
+    --line:#E6E2D9;
+    --brand:#2A296A;
+    --brand-bright:#3B3A90;
+    --cyan:#1493B4;
+    --cyan-soft:#DBF0F5;
+    --gold:#B98D34;
+    --danger:#9B4A3F;
+    --danger-soft:#F2DED8;
+    --ok:#2E7D5B;
+    --radius:20px;
+    --shadow-sm: 0 1px 2px rgba(20,20,40,.05), 0 4px 12px -6px rgba(20,20,40,.12);
+    --shadow: 0 1px 2px rgba(20,20,40,.05), 0 16px 40px -20px rgba(20,20,40,.22);
+    /* committed-dark section literals (hold in both themes) */
+    --navy-0:#14132E;
+    --navy-1:#201F52;
+    --navy-2:#2E2C74;
+    --cream:#FBF6E9;
+    --gold-bright:#E0B968;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121119;
+      --surface:#1B1A24;
+      --surface-2:#232230;
+      --ink:#ECEBF2;
+      --ink-soft:#A7A6B4;
+      --ink-faint:#71707E;
+      --line:#2C2B39;
+      --brand:#9C9BE8;
+      --brand-bright:#B4B3F0;
+      --cyan:#4FC3DF;
+      --cyan-soft:#12313A;
+      --gold:#DDB05E;
+      --danger:#E39185;
+      --danger-soft:#3A241F;
+      --ok:#6FC79E;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 4px 12px -6px rgba(0,0,0,.5);
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 44px -22px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121119;
+    --surface:#1B1A24;
+    --surface-2:#232230;
+    --ink:#ECEBF2;
+    --ink-soft:#A7A6B4;
+    --ink-faint:#71707E;
+    --line:#2C2B39;
+    --brand:#9C9BE8;
+    --brand-bright:#B4B3F0;
+    --cyan:#4FC3DF;
+    --cyan-soft:#12313A;
+    --gold:#DDB05E;
+    --danger:#E39185;
+    --danger-soft:#3A241F;
+    --ok:#6FC79E;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 4px 12px -6px rgba(0,0,0,.5);
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 44px -22px rgba(0,0,0,.7);
+  }
+
+  /* ============ BASE ============ */
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Be Vietnam Pro','Segoe UI',system-ui,Arial,sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Fraunces',Georgia,'Noto Serif',serif; text-wrap:balance; margin:0; font-weight:500; line-height:1.12; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+  .eyebrow{ font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--cyan); }
+  .section{ padding:84px 0; }
+  .section-tight{ padding:60px 0; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; font-weight:600; font-size:15px;
+    padding:14px 26px; border-radius:100px; border:none; cursor:pointer; white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{ background:var(--brand); color:#fff; box-shadow:var(--shadow-sm); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:var(--shadow); }
+  .btn-gold{ background:var(--gold-bright); color:var(--navy-1); }
+  .btn-gold:hover{ transform:translateY(-2px); }
+  .btn-ghost{ background:transparent; border:1.5px solid currentColor; }
+
+  /* ============ NAV ============ */
+  nav{
+    position:sticky; top:0; z-index:50; backdrop-filter:saturate(160%) blur(12px);
+    background:color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .logo{ font-family:'Fraunces',serif; font-weight:600; font-size:23px; letter-spacing:-.01em; color:var(--brand); display:flex; align-items:center; gap:9px; }
+  .logo-mark{ width:26px; height:26px; }
+  .nav-links{ display:flex; gap:28px; font-size:14.5px; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{ font-size:14px; padding:10px 20px; white-space:nowrap; }
+  .nav-actions{ display:flex; align-items:center; gap:16px; }
+  .nav-hotline{ display:flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color:var(--brand); white-space:nowrap; }
+  .nav-hotline svg{ width:17px; height:17px; flex-shrink:0; }
+  .nav-hotline span{ display:inline; }
+  .foot-phone{ color:var(--brand); font-weight:600; }
+  @media (max-width:760px){ .nav-links{ display:none; } .nav-hotline span{ display:none; } .nav-actions{ gap:12px; } }
+  @media (max-width:400px){ .nav-cta{ padding:9px 14px; font-size:13px; } }
+
+  /* ============ HERO (committed light — ảnh 1 bên, chữ 1 bên, nền cream blend liền mạch với ảnh) ============ */
+  .hero{ background:#F6F4EF; border-bottom:1px solid #E6E2D9; }
+  .hero-layout{ max-width:1080px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:28px; min-height:600px; padding:32px 24px; }
+  .hero-text-col{ max-width:520px; }
+  .hero .eyebrow{ color:#1493B4; }
+  .hero h1{ font-size:clamp(24px,3vw,42px); color:#2A296A; margin:18px 0 20px; text-wrap:normal; }
+  .hero h1 .ln{ display:block; white-space:nowrap; }
+  @media (max-width:420px){ .hero h1 .ln{ white-space:normal; } }
+  .hero h1 em{ font-style:normal; font-weight:700; color:#1493B4; }
+  .hero-sub{ font-size:17px; line-height:1.6; color:#585863; max-width:44ch; }
+  .hero-trust{ display:flex; flex-wrap:wrap; gap:10px; margin:26px 0 30px; }
+  .chip{ display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:500; padding:8px 14px; border-radius:100px; }
+  .hero .chip{ background:#fff; border:1px solid #E6E2D9; color:#585863; box-shadow:var(--shadow-sm); }
+  .chip svg{ width:14px; height:14px; color:#1493B4; flex-shrink:0; }
+  .hero .btn-primary{ background:#2A296A; color:#fff; }
+  .hero-media{ display:flex; align-items:center; justify-content:center; }
+  .hero-media img{ width:100%; max-width:520px; height:auto; }
+  @media (max-width:860px){
+    .hero-layout{ grid-template-columns:1fr; text-align:center; gap:6px; padding:24px 20px 36px; }
+    .hero-text-col{ max-width:none; margin:0 auto; }
+    .hero-trust{ justify-content:center; }
+    .hero-media{ order:-1; }
+    .hero-media img{ max-width:300px; }
+  }
+
+  /* image placeholder (khung chờ gen ảnh) */
+  .img-ph{ width:100%; border:2px dashed var(--line); border-radius:18px;
+    background:repeating-linear-gradient(45deg,var(--surface),var(--surface) 12px,var(--surface-2) 12px,var(--surface-2) 24px);
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
+    color:var(--ink-faint); font-size:13px; font-weight:600; line-height:1.5; }
+
+  /* ============ PAIN (ảnh 1 bên · header + 3 ý thẳng hàng bên kia) ============ */
+  .pain{ background:var(--surface-2); }
+  .pain-layout{ display:grid; grid-template-columns:minmax(0,430px) 1fr; gap:48px; align-items:center; }
+  .pain-media .img-ph{ aspect-ratio:4/5; }
+  .pain-content .eyebrow{ color:var(--cyan); }
+  .pain-content h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); margin:12px 0 28px; max-width:22ch; }
+  .pain-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:22px; }
+  .pain-list li{ display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; }
+  .pain-list .pn{ font-family:'Fraunces',serif; font-style:italic; font-size:22px; color:var(--cyan); line-height:1.1; }
+  .pain-list p{ font-size:15.5px; color:var(--ink-soft); line-height:1.55; }
+  .pain-foot{ text-align:center; margin-top:44px; font-size:16.5px; color:var(--ink); max-width:56ch; margin-left:auto; margin-right:auto; }
+  .pain-foot b{ color:var(--brand); font-weight:600; }
+  @media (max-width:820px){
+    .pain-layout{ grid-template-columns:1fr; gap:28px; }
+    .pain-content h2{ max-width:none; }
+    .pain-media{ max-width:360px; margin:0 auto; width:100%; }
+  }
+
+  /* ============ MYTH ============ */
+  .myth-head{ max-width:40ch; margin-bottom:40px; }
+  .myth-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
+  .check-list{ display:flex; flex-direction:column; gap:14px; max-width:760px; margin:0 auto; }
+  .check-item{ display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:flex-start; padding:18px 22px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow-sm); }
+  .check-item .ck{ width:26px; height:26px; border-radius:50%; background:var(--ok); color:#fff; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .check-item .ck svg{ width:15px; height:15px; }
+  .check-item .problem{ font-size:15px; line-height:1.5; color:var(--ink); }
+  .check-item .solution{ display:flex; gap:8px; margin-top:8px; font-size:14.5px; line-height:1.5; color:var(--ink-soft); }
+  .check-item .arrow{ color:var(--brand); font-weight:700; flex-shrink:0; }
+  .check-item b{ color:var(--brand); font-weight:700; font-style:italic; }
+  .check-item.delay .ck{ background:var(--gold); }
+  .check-item.delay .arrow{ color:var(--gold); }
+  .check-item.delay b{ color:var(--gold); }
+
+  /* ============ PRODUCT ROWS (2 hàng ngang · ảnh thật to 1 bên) ============ */
+  .lines-head{ text-align:center; max-width:46ch; margin:0 auto 46px; }
+  .lines-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
+  .lines-head p{ margin-top:14px; color:var(--ink-soft); }
+  .prow{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .prow + .prow{ margin-top:44px; padding-top:44px; border-top:1px solid var(--line); }
+  .prow-media .img-ph{ aspect-ratio:4/3; }
+  .prow-media img{ aspect-ratio:4/3; width:100%; border-radius:22px; object-fit:cover; box-shadow:var(--shadow); }
+  .prow.reverse .prow-media{ order:2; }
+  .pcard-kicker{ font-size:12.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
+  .prow-nuoc .pcard-kicker{ color:var(--cyan); }
+  .prow-delay .pcard-kicker{ color:var(--gold); }
+  .prow h3{ font-size:28px; margin:8px 0 6px; color:var(--ink); }
+  .prow-tagline{ font-size:15px; margin-bottom:22px; color:var(--ink-soft); }
+  .pcard-feats{ list-style:none; padding:0; margin:0 0 26px; display:flex; flex-direction:column; gap:13px; }
+  .pcard-feats li{ display:flex; gap:11px; font-size:14.5px; line-height:1.5; color:var(--ink-soft); }
+  .pcard-feats svg{ width:19px; height:19px; flex-shrink:0; margin-top:2px; }
+  .prow-nuoc .pcard-feats svg{ color:var(--cyan); }
+  .prow-delay .pcard-feats svg{ color:var(--gold); }
+  .pcard-foot{ display:flex; align-items:flex-end; gap:22px; }
+  .price{ font-family:'Fraunces',serif; font-weight:600; font-size:30px; font-variant-numeric:tabular-nums; color:var(--ink); }
+  .price small{ display:block; font-family:'Be Vietnam Pro',sans-serif; font-weight:400; font-size:12.5px; text-decoration:line-through; opacity:.6; }
+  @media (max-width:820px){
+    .prow{ grid-template-columns:1fr; gap:24px; }
+    .prow.reverse .prow-media{ order:-1; }
+  }
+
+  /* ============ INGREDIENTS (mỗi SP 1 hàng · text 1 bên · ảnh thật/3D realistic 1 bên) ============ */
+  .irow{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .irow + .irow{ margin-top:44px; padding-top:44px; border-top:1px solid var(--line); }
+  .irow-media .img-ph{ aspect-ratio:1/1; }
+  .irow-media img{ aspect-ratio:1/1; width:100%; border-radius:22px; object-fit:cover; box-shadow:var(--shadow); }
+  .irow.reverse .irow-media{ order:2; }
+  .irow .eyebrow{ color:var(--cyan); }
+  .irow-delay .eyebrow{ color:var(--gold); }
+  .irow h3{ font-size:24px; margin:8px 0 10px; color:var(--ink); }
+  .irow-desc{ font-size:15px; line-height:1.6; color:var(--ink-soft); max-width:44ch; }
+  .ingr-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .ingr-tag{ font-size:13px; font-weight:600; padding:8px 15px; border-radius:100px; background:var(--surface); border:1px solid var(--line); color:var(--ink-soft); box-shadow:var(--shadow-sm); }
+  @media (max-width:820px){
+    .irow{ grid-template-columns:1fr; gap:24px; }
+    .irow.reverse .irow-media{ order:-1; }
+  }
+
+  /* ============ COMPARISON ============ */
+  .cmp-head{ text-align:center; max-width:44ch; margin:0 auto 40px; }
+  .cmp-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
+  .cmp-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow-sm); background:var(--surface); }
+  table.cmp{ border-collapse:collapse; width:100%; min-width:520px; }
+  table.cmp th, table.cmp td{ padding:16px 22px; text-align:left; border-bottom:1px solid var(--line); font-size:14.5px; }
+  table.cmp thead th{ font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:600; }
+  table.cmp thead th.col-us{ color:var(--brand); }
+  table.cmp tr:last-child td{ border-bottom:none; }
+  table.cmp td.row-label{ color:var(--ink-soft); font-weight:500; }
+  table.cmp td.col-us{ background:color-mix(in srgb, var(--brand) 6%, transparent); font-weight:600; color:var(--ink); }
+  .yes{ color:var(--ok); font-weight:600; } .no{ color:var(--danger); font-weight:600; }
+  .cmp-layout{ display:grid; grid-template-columns:minmax(0,400px) 1fr; gap:44px; align-items:center; }
+  .cmp-media .img-ph{ aspect-ratio:4/5; }
+  .cmp-media img{ width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); }
+  @media (max-width:860px){ .cmp-layout{ grid-template-columns:1fr; gap:26px; } .cmp-media{ max-width:360px; margin:0 auto; } }
+
+  /* ============ USAGE ============ */
+  .usage{ background:var(--surface-2); }
+  .usage-head{ text-align:center; margin-bottom:44px; }
+  .usage-head h2{ font-size:clamp(24px,3vw,32px); color:var(--ink); }
+  .usage-layout{ display:grid; grid-template-columns:minmax(0,360px) 1fr; gap:44px; align-items:center; }
+  .usage-media{ display:flex; align-items:center; justify-content:center; }
+  .usage-media svg{ width:100%; max-width:360px; }
+  .steps{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; counter-reset:step; }
+  .step{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:26px 22px; box-shadow:var(--shadow-sm); }
+  .step .n{ width:36px; height:36px; border-radius:50%; background:var(--brand); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:600; font-size:17px; margin-bottom:14px; }
+  .step p{ font-size:14.5px; color:var(--ink-soft); }
+  @media (max-width:860px){ .usage-layout{ grid-template-columns:1fr; gap:26px; } .usage-media{ max-width:260px; margin:0 auto; } }
+  .usage-single{ max-width:640px; margin:0 auto; }
+  .usage-single img{ width:100%; border-radius:20px; box-shadow:var(--shadow); }
+  @media (max-width:520px){ .steps{ grid-template-columns:1fr; } }
+
+  /* ============ BRAND ============ */
+  .brand-band{ text-align:center; max-width:60ch; margin:0 auto; }
+  .brand-band h2{ font-size:clamp(24px,3vw,32px); color:var(--brand); margin-bottom:22px; }
+  .brand-facts{ display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin:28px 0 24px; }
+  .fact{ font-size:13.5px; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line); padding:10px 18px; border-radius:100px; box-shadow:var(--shadow-sm); }
+  .brand-quote{ font-family:'Dancing Script',cursive; font-weight:700; font-size:30px; color:var(--brand); line-height:1.4; max-width:22ch; margin:0 auto; }
+  .brand-marquee{ margin-top:46px; overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
+  .brand-track{ display:flex; gap:18px; width:max-content; animation:brand-scroll 45s linear infinite; }
+  .brand-marquee:hover .brand-track{ animation-play-state:paused; }
+  .brand-tile{ width:260px; height:200px; flex-shrink:0; border-radius:16px; }
+  .brand-tile.img-ph{ font-size:12px; padding:16px; }
+  .brand-tile img{ width:100%; height:100%; object-fit:cover; border-radius:16px; }
+  @keyframes brand-scroll{ from{ transform:translateX(0);} to{ transform:translateX(calc(-50% - 9px));} }
+  @media (prefers-reduced-motion: reduce){ .brand-track{ animation:none; flex-wrap:wrap; width:auto; justify-content:center; } }
+  .cert-head{ text-align:center; margin:58px 0 26px; }
+  .cert-head h3{ font-family:'Fraunces',serif; font-weight:500; font-size:22px; color:var(--ink); }
+  .cert-head p{ font-size:14px; color:var(--ink-soft); margin-top:6px; }
+  .cert-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .cert-tile .img-ph{ aspect-ratio:3/4; }
+  .cert-tile img{ width:100%; aspect-ratio:3/4; object-fit:contain; border-radius:12px; box-shadow:var(--shadow-sm); background:var(--surface); padding:6px; }
+  .cert-cap{ text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:8px; font-weight:500; }
+  @media (max-width:720px){ .cert-grid{ grid-template-columns:1fr 1fr; } }
+
+  /* ============ PRICING ============ */
+  .pricing-head{ text-align:center; margin-bottom:44px; }
+  .pricing-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
+  .pricing-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .plan{ background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:30px 26px; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); position:relative; }
+  .plan.featured{ border:2px solid var(--brand); box-shadow:var(--shadow); }
+  .plan-badge{ position:absolute; top:-12px; left:26px; background:var(--brand); color:#fff; font-size:11.5px; font-weight:600; padding:5px 13px; border-radius:100px; letter-spacing:.03em; }
+  .plan-media .img-ph{ aspect-ratio:4/3; margin-bottom:18px; font-size:12px; }
+  .plan-media{ height:230px; margin-bottom:18px; display:flex; align-items:flex-end; justify-content:center; }
+  .plan-media img{ max-width:100%; height:100%; width:auto; object-fit:contain; }
+  .plan-name{ font-size:16px; font-weight:600; color:var(--ink); }
+  .plan-desc{ font-size:13px; color:var(--ink-faint); margin:4px 0 0; }
+  .plan-foot{ margin-top:auto; padding-top:18px; }
+  .plan-price{ display:block; font-family:'Fraunces',serif; font-weight:600; font-size:28px; color:var(--brand); font-variant-numeric:tabular-nums; }
+  .plan-price small{ display:block; font-family:'Be Vietnam Pro',sans-serif; font-weight:400; font-size:12.5px; color:var(--ink-faint); text-decoration:line-through; }
+  .plan .btn{ margin-top:14px; width:100%; justify-content:center; }
+  @media (max-width:920px){ .pricing-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .pricing-grid{ grid-template-columns:1fr; } }
+
+  /* ============ FAQ ============ */
+  .faq-head{ text-align:center; margin-bottom:40px; }
+  .faq-head h2{ font-size:clamp(24px,3vw,32px); color:var(--ink); }
+  .faq-list{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  details.faq{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:0 22px; box-shadow:var(--shadow-sm); }
+  details.faq summary{ cursor:pointer; list-style:none; padding:20px 0; font-weight:600; font-size:15.5px; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  details.faq summary::-webkit-details-marker{ display:none; }
+  details.faq summary::after{ content:"+"; font-size:22px; color:var(--cyan); font-weight:400; transition:transform .2s; }
+  details.faq[open] summary::after{ transform:rotate(45deg); }
+  details.faq p{ padding:0 0 20px; font-size:14.5px; color:var(--ink-soft); line-height:1.6; }
+
+  /* ============ FINAL CTA (committed dark) ============ */
+  .final{ background:radial-gradient(120% 130% at 50% 0%, var(--navy-2), var(--navy-1) 55%, var(--navy-0)); color:var(--cream); text-align:center; }
+  .final-inner{ max-width:56ch; margin:0 auto; }
+  .final h2{ font-size:clamp(28px,4vw,42px); color:var(--cream); margin-bottom:18px; }
+  .final p{ color:#C6C4E8; font-size:16.5px; line-height:1.6; margin-bottom:30px; }
+  .final .btn{ font-size:16px; padding:16px 34px; }
+  .final-trust{ display:flex; flex-wrap:wrap; justify-content:center; gap:14px 26px; margin-top:34px; font-size:13.5px; color:#B4B2DC; }
+  .final-trust span{ display:inline-flex; align-items:center; gap:8px; }
+  .final-trust svg{ width:16px; height:16px; color:var(--gold-bright); }
+  .final-contact{ margin-top:26px; font-size:14px; color:#9d9bc9; }
+
+  /* ============ FOOTER ============ */
+  footer.site{ background:var(--surface); border-top:1px solid var(--line); padding:38px 0; }
+  .foot-inner{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; align-items:center; }
+  .foot-brand{ font-family:'Fraunces',serif; font-weight:600; font-size:19px; color:var(--brand); }
+  .foot-meta{ font-size:12.5px; color:var(--ink-faint); line-height:1.7; max-width:52ch; }
+  .foot-legal{ margin-top:18px; font-size:11.5px; color:var(--ink-faint); line-height:1.6; border-top:1px solid var(--line); padding-top:16px; }
+
+  /* reveal */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
+
+  :focus-visible{ outline:2.5px solid var(--cyan); outline-offset:3px; border-radius:6px; }
+
+  /* ============ ORDER MODAL ============ */
+  .modal-overlay{ position:fixed; inset:0; background:rgba(20,19,30,.55); backdrop-filter:blur(3px); display:none; align-items:center; justify-content:center; padding:20px; z-index:200; }
+  .modal-overlay.open{ display:flex; }
+  .modal-card{ background:var(--surface); border-radius:22px; max-width:440px; width:100%; max-height:92vh; overflow-y:auto; padding:30px 28px; box-shadow:var(--shadow); position:relative; }
+  .modal-close{ position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; border:none; background:var(--surface-2); color:var(--ink-soft); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .modal-card h3{ font-size:22px; color:var(--brand); margin-bottom:6px; }
+  .modal-sub{ font-size:13.5px; color:var(--ink-soft); margin-bottom:22px; line-height:1.5; }
+  .form-field{ margin-bottom:16px; }
+  .form-field label{ display:block; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+  .form-field input, .form-field textarea{ width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line); background:var(--bg); color:var(--ink); font-size:14.5px; font-family:inherit; }
+  .form-field input:focus, .form-field textarea:focus{ outline:none; border-color:var(--brand); }
+  .product-options{ display:flex; flex-direction:column; gap:10px; }
+  .product-opt{ display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line); cursor:pointer; font-size:14px; color:var(--ink); }
+  .product-opt input{ accent-color:var(--brand); width:16px; height:16px; }
+  .product-opt:has(input:checked){ border-color:var(--brand); background:color-mix(in srgb, var(--brand) 6%, transparent); }
+  .modal-submit{ width:100%; justify-content:center; margin-top:6px; }
+  .modal-trust{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .modal-trust span{ font-size:11.5px; color:var(--ink-faint); background:var(--surface-2); padding:6px 11px; border-radius:100px; }
+  .modal-success{ display:none; text-align:center; padding:10px 0; }
+  .modal-success.show{ display:block; }
+  .modal-success svg{ width:52px; height:52px; color:var(--ok); margin:0 auto 14px; display:block; }
+  .modal-success h3{ color:var(--ink); }
+  .modal-success p{ color:var(--ink-soft); font-size:14.5px; margin-top:8px; }
+</style>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <path d="M20 5C27 13 31 20 31 26C31 32.6 26 37 20 37C14 37 9 32.6 9 26C9 20 13 13 20 5Z" fill="currentColor" opacity=".16"/>
+        <path d="M20 11C24.5 16.5 27 21 27 25.5C27 30 24 33 20 33" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      Haimirex
+    </div>
+    <div class="nav-links">
+      <a href="#products">Sản phẩm</a>
+      <a href="#ingredients">Thành phần</a>
+      <a href="#pricing">Bảng giá</a>
+      <a href="#faq">Hỏi đáp</a>
+    </div>
+    <div class="nav-actions">
+      <a class="nav-hotline" href="tel:0965070039">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>096 507 00 39</span>
+      </a>
+      <button type="button" class="btn btn-primary nav-cta" data-open-order data-product="">Mua ngay</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-layout">
+    <div class="hero-text-col reveal">
+      <span class="eyebrow">Haimirex · Chăm sóc sức khỏe lứa đôi</span>
+      <h1><span class="ln">Trơn mượt từng cú chạm,</span><span class="ln"><em>kéo dài</em> cảm xúc thăng hoa</span></h1>
+      <p class="hero-sub">Gel bôi trơn gốc nước dịu nhẹ và gel hỗ trợ kéo dài từ thảo dược, an toàn, dễ rửa, không lo tác dụng phụ.</p>
+      <div class="hero-trust">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gốc nước, dễ rửa, không bết dính</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Thích ứng mọi loại bao cao su</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Đóng gói kín đáo, bảo mật</span>
+      </div>
+      <button type="button" class="btn btn-primary" data-open-order data-product="">Đặt hàng ngay →</button>
+    </div>
+    <div class="hero-media reveal">
+      <img src="__IMG_HERO_DUO__" alt="Bộ đôi Gel bôi trơn Haimirex Gốc Nước và Haimirex Delay">
+    </div>
+  </div>
+</header>
+
+<!-- ================= PAIN ================= -->
+<section class="section pain">
+  <div class="wrap">
+    <div class="pain-layout">
+      <div class="pain-media reveal">
+        <img src="__IMG_PAIN_COUPLE_NEW__" alt="Cặp đôi châu Á trầm tư, khoảng cách cảm xúc trong phòng ngủ" style="width:100%;border-radius:18px;box-shadow:var(--shadow);aspect-ratio:4/5;object-fit:cover;">
+      </div>
+      <div class="pain-content reveal">
+        <span class="eyebrow">Điều ít ai nói ra</span>
+        <h2>Khi chuyện ấy không còn như ý muốn</h2>
+        <ul class="pain-list">
+          <li><span class="pn">01</span><p>Khô hạn, mất độ ẩm tự nhiên, nhất là sau sinh, sau 30 tuổi, hoặc khi căng thẳng kéo dài.</p></li>
+          <li><span class="pn">02</span><p>Thời gian ngắn hơn mong muốn, cảm xúc chưa kịp trọn vẹn đã kết thúc.</p></li>
+          <li><span class="pn">03</span><p>Áp lực tâm lý khiến cả hai dần gượng gạo thay vì tận hưởng.</p></li>
+        </ul>
+      </div>
+    </div>
+    <p class="pain-foot reveal">Càng để lâu, khoảng cách này sẽ âm thầm bào mòn sự tự tin và kết nối giữa hai người. <b>Haimirex</b> cung cấp 2 dòng gel bôi trơn gốc nước, giải quyết các vấn đề trong chuyện yêu.</p>
+  </div>
+</section>
+
+<!-- ================= MYTH ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="myth-head reveal">
+      <span class="eyebrow">Đập tan hiểu lầm</span>
+      <h2>Bạn có đang hiểu sai về gel bôi trơn?</h2>
+    </div>
+    <div class="check-list">
+      <div class="check-item reveal">
+        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <p class="problem">Gel gốc dầu, silicon dễ ăn mòn, làm rách bao cao su latex.</p>
+          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Gốc Nước</b> an toàn với mọi loại bao cao su.</span></p>
+        </div>
+      </div>
+      <div class="check-item reveal">
+        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <p class="problem">pH trung tính phá vỡ môi trường acid tự nhiên, dễ sinh nấm.</p>
+          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Gốc Nước</b> có pH 3.8–4.5, bảo vệ hệ vi sinh "cô bé".</span></p>
+        </div>
+      </div>
+      <div class="check-item reveal">
+        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <p class="problem">Silicon bám dai, khó rửa, dễ gây bí tắc, viêm nhiễm.</p>
+          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Gốc Nước</b> trôi sạch 100% chỉ bằng nước.</span></p>
+        </div>
+      </div>
+      <div class="check-item delay reveal">
+        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <p class="problem">Gel, xịt kéo dài chứa Benzocaine, Lidocaine gây tê liệt, dễ tê lây sang đối phương.</p>
+          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Delay</b> chỉ dùng bạc hà, gừng, không gây tê.</span></p>
+        </div>
+      </div>
+      <div class="check-item delay reveal">
+        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <p class="problem">Xịt kéo dài bốc hơi nhanh, phải bôi lại liên tục.</p>
+          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Delay</b> khóa ẩm HA, bền bỉ suốt cuộc yêu.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<section class="section" id="products">
+  <div class="wrap">
+    <div class="lines-head reveal">
+      <span class="eyebrow">Hai dòng sản phẩm</span>
+      <h2>Giải pháp cho từng nhu cầu cụ thể</h2>
+      <p>Cùng gốc nước, không Paraben, không Silicone, không nền dầu, tương thích hoàn toàn với bao cao su Latex.</p>
+    </div>
+    <div class="prow prow-nuoc reveal">
+      <div class="prow-media"><img src="__IMG_PROW_NUOC_PEACH__" alt="Gel bôi trơn Haimirex Gốc Nước nhỏ giọt lên quả đào"></div>
+      <div class="prow-content">
+        <span class="pcard-kicker">Haimirex Gốc Nước</span>
+        <h3>Bôi trơn &amp; Cấp ẩm</h3>
+        <p class="prow-tagline">Dành cho cả hai, đặc biệt khi cần cấp ẩm, giảm khô rát.</p>
+        <ul class="pcard-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Glycerin + Gluconolactone: cấp ẩm nhanh, mượt không nhờn rít</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Acid Lactic cân bằng pH vùng kín tự nhiên</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Dễ rửa sạch bằng nước, dùng được hàng ngày</li>
+        </ul>
+        <div class="pcard-foot">
+          <span class="price">151.000đ</span>
+          <button type="button" class="btn btn-primary" data-open-order data-product="Haimirex Gốc Nước 100ml">Chọn mua</button>
+        </div>
+      </div>
+    </div>
+    <div class="prow prow-delay reverse reveal">
+      <div class="prow-media"><img src="__IMG_PROW_DELAY_DRIFTWOOD__" alt="Gel bôi trơn Haimirex Delay đặt trên gốc cây, nền tối sang trọng"></div>
+      <div class="prow-content">
+        <span class="pcard-kicker">Haimirex Delay</span>
+        <h3>Thảo dược &amp; Kéo dài</h3>
+        <p class="prow-tagline">Dành cho nam giới muốn làm chủ nhịp cảm xúc, kéo dài tự nhiên.</p>
+        <ul class="pcard-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Mật Nhân, Nhân sâm, Đinh lăng, Bạch quả, Bạc hà, Gừng, Lô hội</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Không gây tê, giữ nguyên cảm nhận thật</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gốc nước mỏng nhẹ, dễ rửa sạch sau khi dùng</li>
+        </ul>
+        <div class="pcard-foot">
+          <span class="price">275.000đ</span>
+          <button type="button" class="btn btn-primary" data-open-order data-product="Haimirex Delay 30ml">Chọn mua</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INGREDIENTS ================= -->
+<section class="section" id="ingredients">
+  <div class="wrap">
+    <div class="lines-head reveal">
+      <span class="eyebrow">Thành phần</span>
+      <h2>Từng hoạt chất, một vai trò rõ ràng</h2>
+    </div>
+    <div class="irow irow-nuoc reveal">
+      <div class="irow-media"><img src="__IMG_INGR_NUOC_INFO__" alt="Thành phần Haimirex Gốc Nước: Glycerin, Gluconolactone, Lactic Acid, HEC"></div>
+      <div class="irow-content">
+        <span class="eyebrow">Haimirex Gốc Nước</span>
+        <h3>Dịu nhẹ, an toàn cho da nhạy cảm</h3>
+        <p class="irow-desc">Công thức tối giản, tập trung cấp ẩm và cân bằng, không Paraben, không Silicone, không nền dầu.</p>
+      </div>
+    </div>
+    <div class="irow irow-delay reverse reveal">
+      <div class="irow-media"><img src="__IMG_INGR_DELAY_INFO__" alt="Thành phần Haimirex Delay: Bạc Hà, Gừng, Nhân Sâm, Mật Nhân, Đinh Lăng, Hệ khóa ẩm HA"></div>
+      <div class="irow-content">
+        <span class="eyebrow">Haimirex Delay</span>
+        <h3>Thảo dược cho sự bền bỉ tự nhiên</h3>
+        <p class="irow-desc">Tổ hợp thảo dược quen thuộc trong y học cổ truyền, kết hợp để hỗ trợ bền bỉ mà không gây tê.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARISON ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="cmp-head reveal">
+      <span class="eyebrow">So sánh khách quan</span>
+      <h2>Haimirex Delay so với gel gây tê phổ biến</h2>
+    </div>
+    <div class="cmp-layout">
+    <div class="cmp-media reveal"><img src="__IMG_CMP_COUPLE_HAPPY__" alt="Cặp đôi hạnh phúc, hài lòng cùng bộ đôi Haimirex"></div>
+    <div class="cmp-wrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr><th></th><th class="col-us">Haimirex Delay</th><th>Gel gây tê (Benzocaine)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-label">Cơ chế</td><td class="col-us">Thảo dược, hỗ trợ tự nhiên</td><td>Làm tê liệt cảm giác tạm thời</td></tr>
+          <tr><td class="row-label">Giữ cảm nhận thật</td><td class="col-us"><span class="yes">✓ Có</span></td><td><span class="no">✕ Không</span></td></tr>
+          <tr><td class="row-label">Gốc nước, dễ vệ sinh</td><td class="col-us"><span class="yes">✓ Có</span></td><td>Tùy sản phẩm</td></tr>
+          <tr><td class="row-label">Tương thích bao cao su</td><td class="col-us"><span class="yes">✓ Có</span></td><td>Tùy sản phẩm</td></tr>
+          <tr><td class="row-label">Dùng lâu dài</td><td class="col-us"><span class="yes">✓ Phù hợp</span></td><td>Không khuyến khích</td></tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USAGE ================= -->
+<section class="section usage">
+  <div class="wrap">
+    <div class="usage-head reveal">
+      <h2>Hướng dẫn sử dụng</h2>
+      <span class="eyebrow">Đơn giản · An toàn</span>
+    </div>
+    <div class="usage-single reveal">
+      <img src="__IMG_USAGE_INFO__" alt="Hướng dẫn sử dụng Haimirex Gốc Nước và Haimirex Delay, 4 bước">
+    </div>
+  </div>
+</section>
+
+<!-- ================= BRAND ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="brand-band reveal">
+      <span class="eyebrow">Về thương hiệu</span>
+      <h2>Haimirex thuộc hệ sinh thái Better Me</h2>
+      <div class="brand-facts">
+        <span class="fact">Công ty Cổ phần Better Me · TP.HCM</span>
+        <span class="fact">Sản xuất tại Việt Nam</span>
+        <span class="fact">Sản phẩm đầy đủ kiểm định &amp; chứng nhận</span>
+        <span class="fact">Bán trực tiếp trên các gian hàng điện tử: Shopee, TikTok Shop, Lazada</span>
+      </div>
+      <p class="brand-quote">"Thân mật không chỉ là khoảnh khắc, mà là cảm xúc cần được nâng niu."</p>
+    </div>
+  </div>
+
+  <!-- marquee ảnh brand chạy ngang liên tục -->
+  <div class="brand-marquee reveal">
+    <div class="brand-track">
+      <div class="brand-tile"><img src="__IMG_BRAND_TILE_1__" alt="Haimirex Gốc Nước trên tay khách hàng"></div>
+      <div class="brand-tile"><img src="__IMG_BRAND_TILE_2__" alt="Trải nghiệm thực tế gel Haimirex"></div>
+      <div class="brand-tile"><img src="__IMG_BRAND_TILE_3__" alt="Haimirex Delay 15ml trên tay"></div>
+      <div class="brand-tile"><img src="__IMG_BRAND_TILE_4__" alt="Haimirex trong túi thể thao"></div>
+      <!-- bản sao để cuộn vô tận -->
+      <div class="brand-tile" aria-hidden="true"><img src="__IMG_BRAND_TILE_1__" alt=""></div>
+      <div class="brand-tile" aria-hidden="true"><img src="__IMG_BRAND_TILE_2__" alt=""></div>
+      <div class="brand-tile" aria-hidden="true"><img src="__IMG_BRAND_TILE_3__" alt=""></div>
+      <div class="brand-tile" aria-hidden="true"><img src="__IMG_BRAND_TILE_4__" alt=""></div>
+    </div>
+  </div>
+
+  <!-- lưới giấy chứng nhận (khổ dọc, 4 cột) -->
+  <div class="wrap">
+    <div class="cert-head reveal">
+      <h3>Chứng nhận &amp; Pháp lý</h3>
+      <p>Sản phẩm đã công bố, kiểm nghiệm đầy đủ theo quy định.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-tile reveal"><img src="__IMG_CERT_KN_NUOC__" alt="Phiếu kiểm nghiệm Haimirex Gốc Nước"><p class="cert-cap">Phiếu kiểm nghiệm Haimirex Gốc Nước</p></div>
+      <div class="cert-tile reveal"><img src="__IMG_CERT_KN_DELAY__" alt="Phiếu kiểm nghiệm Haimirex Delay"><p class="cert-cap">Phiếu kiểm nghiệm Haimirex Delay</p></div>
+      <div class="cert-tile reveal"><img src="__IMG_CERT_CONGBO__" alt="Phiếu công bố sản phẩm"><p class="cert-cap">Phiếu công bố sản phẩm</p></div>
+      <div class="cert-tile reveal"><img src="__IMG_CERT_ISO__" alt="Chứng nhận ISO"><p class="cert-cap">Chứng nhận ISO</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="section" id="pricing" style="background:var(--surface-2);">
+  <div class="wrap">
+    <div class="pricing-head reveal">
+      <span class="eyebrow">Chọn combo phù hợp</span>
+      <h2>Bảng giá &amp; ưu đãi</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <div class="plan-media"><img src="__IMG_PLAN_NUOC__" alt="Haimirex Gốc Nước 100ml"></div>
+        <span class="plan-name">Haimirex Gốc Nước 100ml</span>
+        <p class="plan-desc">Bôi trơn &amp; cấp ẩm, dùng hàng ngày.</p>
+        <div class="plan-foot">
+          <span class="plan-price">151.000đ</span>
+          <button type="button" class="btn btn-ghost" style="color:var(--brand);" data-open-order data-product="Haimirex Gốc Nước 100ml">Chọn mua</button>
+        </div>
+      </div>
+      <div class="plan featured reveal">
+        <span class="plan-badge">Chăm sóc cho cả hai</span>
+        <div class="plan-media"><img src="__IMG_PLAN_COMBO__" alt="Combo Haimirex Gốc Nước và Haimirex Delay"></div>
+        <span class="plan-name">Combo Gốc Nước + Delay</span>
+        <p class="plan-desc">Một người cần cấp ẩm, một người muốn thêm tự tin.</p>
+        <div class="plan-foot">
+          <span class="plan-price">412.000đ</span>
+          <button type="button" class="btn btn-primary" data-open-order data-product="Combo Gốc Nước + Delay">Mua combo</button>
+        </div>
+      </div>
+      <div class="plan reveal">
+        <div class="plan-media"><img src="__IMG_PLAN_DELAY_1__" alt="Haimirex Delay 15ml"></div>
+        <span class="plan-name">Haimirex Delay 15ml</span>
+        <p class="plan-desc">Thảo dược, kéo dài tự nhiên, dung tích nhỏ gọn.</p>
+        <div class="plan-foot">
+          <span class="plan-price">183.000đ</span>
+          <button type="button" class="btn btn-ghost" style="color:var(--brand);" data-open-order data-product="Haimirex Delay 15ml">Chọn mua</button>
+        </div>
+      </div>
+      <div class="plan reveal">
+        <div class="plan-media"><img src="__IMG_PLAN_DELAY_2__" alt="Haimirex Delay 30ml"></div>
+        <span class="plan-name">Haimirex Delay 30ml</span>
+        <p class="plan-desc">Thảo dược, kéo dài tự nhiên, dùng được lâu dài.</p>
+        <div class="plan-foot">
+          <span class="plan-price">275.000đ</span>
+          <button type="button" class="btn btn-ghost" style="color:var(--brand);" data-open-order data-product="Haimirex Delay 30ml">Chọn mua</button>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:26px; font-size:13.5px; color:var(--ink-faint);">Giao hàng kín đáo · Che tên sản phẩm 100% · Bảo mật thông tin khách hàng &nbsp;·&nbsp; Thanh toán khi nhận hàng</p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="faq-head reveal">
+      <span class="eyebrow">Giải đáp nhanh</span>
+      <h2>Câu hỏi thường gặp</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq reveal"><summary>Có an toàn khi dùng với bao cao su và dùng hàng ngày không?</summary><p>Có. Haimirex gốc nước, tương thích hoàn toàn với bao cao su Latex, có thể dùng hàng ngày để giữ ẩm và thoải mái.</p></details>
+      <details class="faq reveal"><summary>Haimirex Delay có gây tê hay mất cảm giác không?</summary><p>Không. Công thức thảo dược hỗ trợ bền bỉ tự nhiên, không chứa chất gây tê, giữ nguyên cảm nhận thật cho cả hai.</p></details>
+      <details class="faq reveal"><summary>Phụ nữ sau sinh có dùng được không?</summary><p>An toàn, lành tính, phù hợp cho phụ nữ sau sinh gặp khô hạn. Nên tham khảo ý kiến bác sĩ trước khi dùng nếu có tiền sử nhạy cảm.</p></details>
+      <details class="faq reveal"><summary>Haimirex có phải là biện pháp tránh thai không?</summary><p>Không. Sản phẩm không chứa chất diệt tinh trùng và không thay thế biện pháp tránh thai.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="section final">
+  <div class="wrap final-inner reveal">
+    <h2>Để mỗi lần gần gũi là một lần kết nối thật sự</h2>
+    <p>Haimirex: gốc nước, thảo dược, không gây tê, cho những khoảnh khắc đáng lẽ phải trọn vẹn.</p>
+    <button type="button" class="btn btn-gold" data-open-order data-product="">Đặt hàng ngay →</button>
+    <div class="final-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke-linejoin="round"/></svg>Che tên sản phẩm 100%</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Bảo mật thông tin khách hàng tuyệt đối</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 8h16M4 8l1.5 11a2 2 0 0 0 2 1.8h9a2 2 0 0 0 2-1.8L20 8M9 8V6a3 3 0 0 1 6 0v2" stroke-linecap="round" stroke-linejoin="round"/></svg>Giao hàng kín đáo, đóng gói trung tính</span>
+    </div>
+    <p class="final-contact">Hỗ trợ tư vấn riêng tư qua Zalo / Hotline &nbsp;·&nbsp; <em>[Điền hotline &amp; Zalo]</em></p>
+  </div>
+</section>
+
+<!-- ================= ORDER MODAL ================= -->
+<div class="modal-overlay" id="orderModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <button type="button" class="modal-close" id="orderModalClose" aria-label="Đóng">✕</button>
+    <div id="orderFormWrap">
+      <h3 id="orderModalTitle">Đặt hàng ngay</h3>
+      <p class="modal-sub">Giao hàng kín đáo, che tên sản phẩm 100%. Thông tin của bạn được bảo mật tuyệt đối.</p>
+      <form id="orderForm">
+        <div class="form-field">
+          <label for="ofName">Họ và tên</label>
+          <input type="text" id="ofName" name="name" required placeholder="Nguyễn Văn A">
+        </div>
+        <div class="form-field">
+          <label for="ofPhone">Số điện thoại</label>
+          <input type="tel" id="ofPhone" name="phone" required placeholder="09xxxxxxxx">
+        </div>
+        <div class="form-field">
+          <label for="ofAddress">Địa chỉ nhận hàng</label>
+          <input type="text" id="ofAddress" name="address" required placeholder="Số nhà, đường, phường/xã, tỉnh/thành">
+        </div>
+        <div class="form-field">
+          <label>Chọn sản phẩm</label>
+          <div class="product-options">
+            <label class="product-opt"><input type="radio" name="product" value="Haimirex Gốc Nước 100ml" required> Haimirex Gốc Nước 100ml</label>
+            <label class="product-opt"><input type="radio" name="product" value="Combo Gốc Nước + Delay"> Combo Gốc Nước + Delay</label>
+            <label class="product-opt"><input type="radio" name="product" value="Haimirex Delay 15ml"> Haimirex Delay 15ml</label>
+            <label class="product-opt"><input type="radio" name="product" value="Haimirex Delay 30ml"> Haimirex Delay 30ml</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary modal-submit">Xác nhận đặt hàng</button>
+        <div class="modal-trust">
+          <span>Che tên sản phẩm 100%</span>
+          <span>Giao hàng kín đáo</span>
+          <span>Bảo mật thông tin khách hàng</span>
+        </div>
+      </form>
+    </div>
+    <div class="modal-success" id="orderSuccess">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Đã ghi nhận đơn hàng!</h3>
+      <p>Haimirex sẽ liên hệ với bạn sớm nhất để xác nhận. Đóng gói kín đáo, bảo mật thông tin tuyệt đối.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">Haimirex</div>
+      <div class="foot-meta">Gel bôi trơn Haimirex giúp cấp ẩm, hỗ trợ cuộc yêu bền bỉ, kéo dài tự nhiên. Thuộc Công ty Cổ phần Better Me, 28B Mạc Cửu, P. Chợ Lớn, TP.HCM.<br>Hotline / Zalo tư vấn: <a href="tel:0965070039" class="foot-phone">096 507 00 39</a></div>
+    </div>
+    <p class="foot-legal">Sản phẩm chỉ dùng ngoài da. Tránh tiếp xúc với mắt hoặc vùng da có vết thương hở. Ngừng sử dụng nếu có dấu hiệu kích ứng. Không phải biện pháp tránh thai, không chứa chất diệt tinh trùng. Thông tin trên trang mang tính tham khảo, không thay thế tư vấn y tế. © 2026 Better Me.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    if(!('IntersectionObserver' in window)){ document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function(e){ io.observe(e); });
+  })();
+
+  (function(){
+    var overlay = document.getElementById('orderModal');
+    var closeBtn = document.getElementById('orderModalClose');
+    var form = document.getElementById('orderForm');
+    var formWrap = document.getElementById('orderFormWrap');
+    var success = document.getElementById('orderSuccess');
+
+    function openModal(product){
+      formWrap.style.display = '';
+      success.classList.remove('show');
+      if(product){
+        var radio = form.querySelector('input[name="product"][value="' + CSS.escape(product) + '"]');
+        if(radio) radio.checked = true;
+      }
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-open-order]').forEach(function(btn){
+      btn.addEventListener('click', function(){ openModal(btn.getAttribute('data-product')); });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      // TODO: nối API/Google Sheet/CRM thực tế để nhận đơn hàng tại đây.
+      formWrap.style.display = 'none';
+      success.classList.add('show');
+    });
+  })();
+</script>
