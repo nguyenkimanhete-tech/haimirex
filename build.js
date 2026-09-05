@@ -36,7 +36,7 @@ const map = {
   __IMG_INGR_NUOC_INFO__: dataUri('ingr-nuoc-info.webp'),
   __IMG_INGR_DELAY_INFO__: dataUri('ingr-delay-info.webp'),
   __IMG_CMP_COUPLE_HAPPY__: dataUri('cmp-couple-happy.webp'),
-  __IMG_USAGE_INFO__: dataUri('usage-info-2.webp'),
+  __IMG_USAGE_INFO__: dataUri('usage-info-3.webp'),
   __IMG_BRAND_TILE_1__: dataUri('brand-tile-1.webp'),
   __IMG_BRAND_TILE_2__: dataUri('brand-tile-2.webp'),
   __IMG_BRAND_TILE_3__: dataUri('brand-tile-3.webp'),
@@ -49,6 +49,11 @@ const map = {
   __IMG_CERT_ISO__: dataUri('cert-iso.webp'),
   __IMG_CERT_KN_DELAY__: dataUri('cert-kiemnghiem-delay.webp'),
   __IMG_CERT_KN_NUOC__: dataUri('cert-kiemnghiem-nuoc.webp'),
+  __IMG_PAIN_COUPLE_2026__: dataUri('pain-couple-2026.webp'),
+  __IMG_PROW_NUOC_2026__: dataUri('prow-nuoc-2026.webp'),
+  __IMG_PROW_DELAY_2026__: dataUri('prow-delay-2026.webp'),
+  __IMG_INGR_NUOC_INFO_2026__: dataUri('ingr-nuoc-info-2026.webp'),
+  __IMG_SHIPPING_BOX_2026__: dataUri('shipping-box-2026.webp'),
 };
 
 let html = fs.readFileSync(path.join(DIR, 'landing.src.html'), 'utf-8');

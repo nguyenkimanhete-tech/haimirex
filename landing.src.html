@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Haimirex</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,13 +157,13 @@
   .pain-layout{ display:grid; grid-template-columns:minmax(0,430px) 1fr; gap:48px; align-items:center; }
   .pain-media .img-ph{ aspect-ratio:4/5; }
   .pain-content .eyebrow{ color:var(--cyan); }
-  .pain-content h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); margin:12px 0 28px; max-width:22ch; }
+  .pain-content h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); margin:0 0 28px; max-width:22ch; }
   .pain-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:22px; }
   .pain-list li{ display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; }
   .pain-list .pn{ font-family:'Fraunces',serif; font-style:italic; font-size:22px; color:var(--cyan); line-height:1.1; }
   .pain-list p{ font-size:15.5px; color:var(--ink-soft); line-height:1.55; }
-  .pain-foot{ text-align:center; margin-top:44px; font-size:16.5px; color:var(--ink); max-width:56ch; margin-left:auto; margin-right:auto; }
-  .pain-foot b{ color:var(--brand); font-weight:600; }
+  .pain-foot{ text-align:center; margin-top:44px; font-size:18px; font-weight:600; color:var(--brand); max-width:52ch; margin-left:auto; margin-right:auto; background:color-mix(in srgb, var(--brand) 7%, transparent); border:1px solid color-mix(in srgb, var(--brand) 18%, transparent); border-radius:18px; padding:24px 30px; line-height:1.5; }
+  .pain-foot b{ color:var(--brand); font-weight:700; }
   @media (max-width:820px){
     .pain-layout{ grid-template-columns:1fr; gap:28px; }
     .pain-content h2{ max-width:none; }
@@ -169,8 +171,20 @@
   }
 
   /* ============ MYTH ============ */
-  .myth-head{ max-width:40ch; margin-bottom:40px; }
-  .myth-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
+  .myth-head{ max-width:640px; margin:0 auto 40px; text-align:center; }
+  .myth-head h2{ font-size:clamp(22px,3.4vw,36px); color:var(--ink); }
+  .myth-head h2 .ln{ display:block; }
+  @media (min-width:640px){
+    .myth-head{ max-width:none; }
+    .myth-head h2 .ln{ white-space:nowrap; }
+  }
+  .myth2-list{ display:flex; flex-direction:column; gap:14px; max-width:760px; margin:0 auto; }
+  .myth2-item{ padding:20px 24px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:10px; }
+  .myth2-item p{ display:flex; gap:10px; align-items:flex-start; font-size:15px; line-height:1.55; margin:0; }
+  .myth2-item .m-false{ color:var(--ink-faint); }
+  .myth2-item .m-true{ color:var(--ink); font-weight:500; }
+  .x-mark{ flex-shrink:0; width:22px; height:22px; border-radius:50%; background:#F1E4E4; color:#B4453F; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; line-height:1; }
+  .check-mark{ flex-shrink:0; width:22px; height:22px; border-radius:50%; background:var(--ok); color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; line-height:1; }
   .check-list{ display:flex; flex-direction:column; gap:14px; max-width:760px; margin:0 auto; }
   .check-item{ display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:flex-start; padding:18px 22px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow-sm); }
   .check-item .ck{ width:26px; height:26px; border-radius:50%; background:var(--ok); color:#fff; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
@@ -187,10 +201,18 @@
   .lines-head{ text-align:center; max-width:46ch; margin:0 auto 46px; }
   .lines-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
   .lines-head p{ margin-top:14px; color:var(--ink-soft); }
+  .lines-head h2 .ln{ display:block; }
+  .lines-head.lines-head-wide{ max-width:640px; }
+  @media (min-width:640px){
+    .lines-head.lines-head-wide{ max-width:none; }
+    .lines-head.lines-head-wide h2 .ln{ white-space:nowrap; }
+  }
   .prow{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
   .prow + .prow{ margin-top:44px; padding-top:44px; border-top:1px solid var(--line); }
-  .prow-media .img-ph{ aspect-ratio:4/3; }
-  .prow-media img{ aspect-ratio:4/3; width:100%; border-radius:22px; object-fit:cover; box-shadow:var(--shadow); }
+  .prow-media .img-ph{ aspect-ratio:4/5; }
+  .prow-media{ aspect-ratio:4/5; max-width:380px; margin:0 auto; border-radius:22px; background:var(--surface-2); box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; padding:14px; }
+  .prow-media img{ width:100%; height:100%; object-fit:contain; }
+  @media (min-width:821px){ .prow-media{ margin:0; } }
   .prow.reverse .prow-media{ order:2; }
   .pcard-kicker{ font-size:12.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
   .prow-nuoc .pcard-kicker{ color:var(--cyan); }
@@ -214,10 +236,11 @@
   .irow{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
   .irow + .irow{ margin-top:44px; padding-top:44px; border-top:1px solid var(--line); }
   .irow-media .img-ph{ aspect-ratio:1/1; }
-  .irow-media img{ aspect-ratio:1/1; width:100%; border-radius:22px; object-fit:cover; box-shadow:var(--shadow); }
+  .irow-media{ aspect-ratio:1/1; border-radius:22px; background:var(--surface-2); box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; padding:28px; }
+  .irow-media img{ width:100%; height:100%; object-fit:contain; }
   .irow.reverse .irow-media{ order:2; }
-  .irow .eyebrow{ color:var(--cyan); }
-  .irow-delay .eyebrow{ color:var(--gold); }
+  .irow-kicker{ display:block; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--cyan); }
+  .irow-delay .irow-kicker{ color:var(--gold); }
   .irow h3{ font-size:24px; margin:8px 0 10px; color:var(--ink); }
   .irow-desc{ font-size:15px; line-height:1.6; color:var(--ink-soft); max-width:44ch; }
   .ingr-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
@@ -229,7 +252,9 @@
 
   /* ============ COMPARISON ============ */
   .cmp-head{ text-align:center; max-width:44ch; margin:0 auto 40px; }
-  .cmp-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
+  .cmp-head h2{ display:flex; flex-direction:column; gap:6px; }
+  .cmp-title-brand{ font-size:clamp(26px,3.4vw,36px); color:var(--brand); font-weight:500; }
+  .cmp-title-sub{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
   .cmp-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow-sm); background:var(--surface); }
   table.cmp{ border-collapse:collapse; width:100%; min-width:520px; }
   table.cmp th, table.cmp td{ padding:16px 22px; text-align:left; border-bottom:1px solid var(--line); font-size:14.5px; }
@@ -247,7 +272,7 @@
   /* ============ USAGE ============ */
   .usage{ background:var(--surface-2); }
   .usage-head{ text-align:center; margin-bottom:44px; }
-  .usage-head h2{ font-size:clamp(24px,3vw,32px); color:var(--ink); }
+  .usage-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
   .usage-layout{ display:grid; grid-template-columns:minmax(0,360px) 1fr; gap:44px; align-items:center; }
   .usage-media{ display:flex; align-items:center; justify-content:center; }
   .usage-media svg{ width:100%; max-width:360px; }
@@ -262,18 +287,18 @@
 
   /* ============ BRAND ============ */
   .brand-band{ text-align:center; max-width:60ch; margin:0 auto; }
-  .brand-band h2{ font-size:clamp(24px,3vw,32px); color:var(--brand); margin-bottom:22px; }
+  .brand-band h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); margin-bottom:22px; }
   .brand-facts{ display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin:28px 0 24px; }
   .fact{ font-size:13.5px; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line); padding:10px 18px; border-radius:100px; box-shadow:var(--shadow-sm); }
-  .brand-quote{ font-family:'Dancing Script',cursive; font-weight:700; font-size:30px; color:var(--brand); line-height:1.4; max-width:22ch; margin:0 auto; }
+  .brand-quote{ font-family:'Fraunces',Georgia,'Noto Serif',serif; font-style:italic; font-weight:500; font-size:26px; color:var(--brand); line-height:1.5; max-width:26ch; margin:0 auto; }
   .brand-marquee{ margin-top:46px; overflow:hidden;
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
     mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
   .brand-track{ display:flex; gap:18px; width:max-content; animation:brand-scroll 45s linear infinite; }
   .brand-marquee:hover .brand-track{ animation-play-state:paused; }
-  .brand-tile{ width:260px; height:200px; flex-shrink:0; border-radius:16px; }
+  .brand-tile{ width:220px; height:280px; flex-shrink:0; border-radius:16px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .brand-tile.img-ph{ font-size:12px; padding:16px; }
-  .brand-tile img{ width:100%; height:100%; object-fit:cover; border-radius:16px; }
+  .brand-tile img{ width:100%; height:100%; object-fit:contain; border-radius:16px; }
   @keyframes brand-scroll{ from{ transform:translateX(0);} to{ transform:translateX(calc(-50% - 9px));} }
   @media (prefers-reduced-motion: reduce){ .brand-track{ animation:none; flex-wrap:wrap; width:auto; justify-content:center; } }
   .cert-head{ text-align:center; margin:58px 0 26px; }
@@ -284,6 +309,22 @@
   .cert-tile img{ width:100%; aspect-ratio:3/4; object-fit:contain; border-radius:12px; box-shadow:var(--shadow-sm); background:var(--surface); padding:6px; }
   .cert-cap{ text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:8px; font-weight:500; }
   @media (max-width:720px){ .cert-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .cert-grid{ grid-template-columns:1fr; max-width:320px; margin:0 auto; } }
+
+  /* ============ SHIPPING / PRIVACY ============ */
+  .shipping-layout{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .shipping-media{ display:flex; align-items:center; justify-content:center; background:var(--surface-2); border-radius:22px; padding:18px; aspect-ratio:3/2; }
+  .shipping-media svg{ width:100%; max-width:260px; }
+  .shipping-content h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); margin-bottom:24px; max-width:16ch; }
+  .shipping-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:16px; }
+  .shipping-list li{ display:flex; align-items:center; gap:12px; font-size:16px; font-weight:600; color:var(--ink); }
+  .shipping-list svg{ width:22px; height:22px; flex-shrink:0; color:var(--ok); }
+  @media (max-width:760px){
+    .shipping-layout{ grid-template-columns:1fr; gap:26px; text-align:center; }
+    .shipping-content h2{ max-width:none; }
+    .shipping-list li{ justify-content:center; }
+    .shipping-media svg{ max-width:170px; }
+  }
 
   /* ============ PRICING ============ */
   .pricing-head{ text-align:center; margin-bottom:44px; }
@@ -306,7 +347,7 @@
 
   /* ============ FAQ ============ */
   .faq-head{ text-align:center; margin-bottom:40px; }
-  .faq-head h2{ font-size:clamp(24px,3vw,32px); color:var(--ink); }
+  .faq-head h2{ font-size:clamp(26px,3.4vw,36px); color:var(--ink); }
   .faq-list{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
   details.faq{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:0 22px; box-shadow:var(--shadow-sm); }
   details.faq summary{ cursor:pointer; list-style:none; padding:20px 0; font-weight:600; font-size:15.5px; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:16px; }
@@ -327,11 +368,18 @@
   .final-contact{ margin-top:26px; font-size:14px; color:#9d9bc9; }
 
   /* ============ FOOTER ============ */
-  footer.site{ background:var(--surface); border-top:1px solid var(--line); padding:38px 0; }
-  .foot-inner{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; align-items:center; }
-  .foot-brand{ font-family:'Fraunces',serif; font-weight:600; font-size:19px; color:var(--brand); }
-  .foot-meta{ font-size:12.5px; color:var(--ink-faint); line-height:1.7; max-width:52ch; }
-  .foot-legal{ margin-top:18px; font-size:11.5px; color:var(--ink-faint); line-height:1.6; border-top:1px solid var(--line); padding-top:16px; }
+  footer.site{ background:var(--surface); border-top:1px solid var(--line); padding:52px 0 30px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px; }
+  .foot-col{ display:flex; flex-direction:column; gap:10px; }
+  .foot-col a{ color:var(--ink-soft); font-size:14px; }
+  .foot-col a:hover{ color:var(--brand); }
+  .foot-col p{ font-size:13.5px; color:var(--ink-faint); line-height:1.7; margin:0; }
+  .foot-brand{ font-family:'Fraunces',serif; font-weight:600; font-size:20px; color:var(--brand); }
+  .foot-desc{ max-width:34ch; }
+  .foot-heading{ font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--ink); margin-bottom:4px; }
+  .foot-phone{ color:var(--brand); font-weight:600; }
+  .foot-legal{ margin-top:36px; font-size:11.5px; color:var(--ink-faint); line-height:1.6; border-top:1px solid var(--line); padding-top:20px; }
+  @media (max-width:700px){ .foot-grid{ grid-template-columns:1fr; gap:26px; } }
 
   /* reveal */
   .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
@@ -396,7 +444,7 @@
   <div class="hero-layout">
     <div class="hero-text-col reveal">
       <span class="eyebrow">Haimirex · Chăm sóc sức khỏe lứa đôi</span>
-      <h1><span class="ln">Trơn mượt từng cú chạm,</span><span class="ln"><em>kéo dài</em> cảm xúc thăng hoa</span></h1>
+      <h1><span class="ln">Mượt mà từng nhịp yêu,</span><span class="ln"><em>trọn vẹn</em> từng cảm xúc</span></h1>
       <p class="hero-sub">Gel bôi trơn gốc nước dịu nhẹ và gel hỗ trợ kéo dài từ thảo dược, an toàn, dễ rửa, không lo tác dụng phụ.</p>
       <div class="hero-trust">
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gốc nước, dễ rửa, không bết dính</span>
@@ -412,23 +460,22 @@
 </header>
 
 <!-- ================= PAIN ================= -->
-<section class="section pain">
+<section class="section pain" style="background:var(--surface);">
   <div class="wrap">
     <div class="pain-layout">
       <div class="pain-media reveal">
-        <img src="__IMG_PAIN_COUPLE_NEW__" alt="Cặp đôi châu Á trầm tư, khoảng cách cảm xúc trong phòng ngủ" style="width:100%;border-radius:18px;box-shadow:var(--shadow);aspect-ratio:4/5;object-fit:cover;">
+        <img src="__IMG_PAIN_COUPLE_2026__" alt="Cặp đôi trầm tư, khoảng cách cảm xúc trong phòng ngủ" style="width:100%;border-radius:18px;box-shadow:var(--shadow);aspect-ratio:4/5;object-fit:cover;">
       </div>
       <div class="pain-content reveal">
-        <span class="eyebrow">Điều ít ai nói ra</span>
         <h2>Khi chuyện ấy không còn như ý muốn</h2>
         <ul class="pain-list">
-          <li><span class="pn">01</span><p>Khô hạn, mất độ ẩm tự nhiên, nhất là sau sinh, sau 30 tuổi, hoặc khi căng thẳng kéo dài.</p></li>
-          <li><span class="pn">02</span><p>Thời gian ngắn hơn mong muốn, cảm xúc chưa kịp trọn vẹn đã kết thúc.</p></li>
-          <li><span class="pn">03</span><p>Áp lực tâm lý khiến cả hai dần gượng gạo thay vì tận hưởng.</p></li>
+          <li><span class="pn">01</span><p>Sau sinh hoặc sau tuổi 30, cơ thể phụ nữ thường gặp vấn đề khô hạn, mất độ ẩm tự nhiên, không còn cảm xúc trong "chuyện ấy".</p></li>
+          <li><span class="pn">02</span><p>"Cuộc yêu" diễn ra nhanh chóng, cảm xúc chưa kịp trọn vẹn đã kết thúc.</p></li>
+          <li><span class="pn">03</span><p>Áp lực tâm lý khiến cả hai gượng gạo, không thể thăng hoa cảm xúc.</p></li>
         </ul>
       </div>
     </div>
-    <p class="pain-foot reveal">Càng để lâu, khoảng cách này sẽ âm thầm bào mòn sự tự tin và kết nối giữa hai người. <b>Haimirex</b> cung cấp 2 dòng gel bôi trơn gốc nước, giải quyết các vấn đề trong chuyện yêu.</p>
+    <p class="pain-foot reveal"><b>Haimirex</b> mang đến giải pháp hỗ trợ cuộc yêu thêm&nbsp;mượt&nbsp;mà,<br>để cả hai tận hưởng trọn vẹn cảm xúc.</p>
   </div>
 </section>
 
@@ -436,59 +483,34 @@
 <section class="section">
   <div class="wrap">
     <div class="myth-head reveal">
-      <span class="eyebrow">Đập tan hiểu lầm</span>
-      <h2>Bạn có đang hiểu sai về gel bôi trơn?</h2>
+      <h2><span class="ln">Gel bôi trơn</span><span class="ln">Giải pháp văn minh cho chuyện yêu</span></h2>
     </div>
-    <div class="check-list">
-      <div class="check-item reveal">
-        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div>
-          <p class="problem">Gel gốc dầu, silicon dễ ăn mòn, làm rách bao cao su latex.</p>
-          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Gốc Nước</b> an toàn với mọi loại bao cao su.</span></p>
-        </div>
+    <div class="myth2-list">
+      <div class="myth2-item reveal">
+        <p class="m-false"><span class="x-mark">✕</span> Nhiều người nghĩ gel bôi trơn sẽ làm giảm cảm xúc khi gần gũi.</p>
+        <p class="m-true"><span class="check-mark">✓</span> Thực tế, gel bôi trơn giúp giảm ma sát, tăng sự thoải mái và để cả hai tập trung tận hưởng cảm xúc.</p>
       </div>
-      <div class="check-item reveal">
-        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div>
-          <p class="problem">pH trung tính phá vỡ môi trường acid tự nhiên, dễ sinh nấm.</p>
-          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Gốc Nước</b> có pH 3.8–4.5, bảo vệ hệ vi sinh "cô bé".</span></p>
-        </div>
+      <div class="myth2-item reveal">
+        <p class="m-false"><span class="x-mark">✕</span> Một số người cho rằng gel bôi trơn chỉ đơn giản là nước.</p>
+        <p class="m-true"><span class="check-mark">✓</span> Gel bôi trơn bổ sung thêm các thành phần khác để cân bằng độ pH, đảm bảo an toàn khi gần gũi.</p>
       </div>
-      <div class="check-item reveal">
-        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div>
-          <p class="problem">Silicon bám dai, khó rửa, dễ gây bí tắc, viêm nhiễm.</p>
-          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Gốc Nước</b> trôi sạch 100% chỉ bằng nước.</span></p>
-        </div>
-      </div>
-      <div class="check-item delay reveal">
-        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div>
-          <p class="problem">Gel, xịt kéo dài chứa Benzocaine, Lidocaine gây tê liệt, dễ tê lây sang đối phương.</p>
-          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Delay</b> chỉ dùng bạc hà, gừng, không gây tê.</span></p>
-        </div>
-      </div>
-      <div class="check-item delay reveal">
-        <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div>
-          <p class="problem">Xịt kéo dài bốc hơi nhanh, phải bôi lại liên tục.</p>
-          <p class="solution"><span class="arrow">→</span><span><b>Haimirex Delay</b> khóa ẩm HA, bền bỉ suốt cuộc yêu.</span></p>
-        </div>
+      <div class="myth2-item reveal">
+        <p class="m-false"><span class="x-mark">✕</span> Dùng gel bôi trơn là vì cơ thể đang gặp vấn đề.</p>
+        <p class="m-true"><span class="check-mark">✓</span> Chủ động sử dụng gel bôi trơn đơn giản là một cách chăm sóc sự thoải mái và chất lượng cuộc yêu.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= PRODUCTS ================= -->
-<section class="section" id="products">
+<section class="section" id="products" style="background:var(--surface);">
   <div class="wrap">
-    <div class="lines-head reveal">
-      <span class="eyebrow">Hai dòng sản phẩm</span>
-      <h2>Giải pháp cho từng nhu cầu cụ thể</h2>
+    <div class="lines-head lines-head-wide reveal">
+      <h2><span class="ln">Haimirex</span><span class="ln">Giải pháp riêng biệt cho từng nhu cầu</span></h2>
       <p>Cùng gốc nước, không Paraben, không Silicone, không nền dầu, tương thích hoàn toàn với bao cao su Latex.</p>
     </div>
     <div class="prow prow-nuoc reveal">
-      <div class="prow-media"><img src="__IMG_PROW_NUOC_PEACH__" alt="Gel bôi trơn Haimirex Gốc Nước nhỏ giọt lên quả đào"></div>
+      <div class="prow-media"><img src="__IMG_PROW_NUOC_2026__" alt="Gel bôi trơn Haimirex Gốc Nước"></div>
       <div class="prow-content">
         <span class="pcard-kicker">Haimirex Gốc Nước</span>
         <h3>Bôi trơn &amp; Cấp ẩm</h3>
@@ -505,7 +527,7 @@
       </div>
     </div>
     <div class="prow prow-delay reverse reveal">
-      <div class="prow-media"><img src="__IMG_PROW_DELAY_DRIFTWOOD__" alt="Gel bôi trơn Haimirex Delay đặt trên gốc cây, nền tối sang trọng"></div>
+      <div class="prow-media"><img src="__IMG_PROW_DELAY_2026__" alt="Gel bôi trơn Haimirex Delay"></div>
       <div class="prow-content">
         <span class="pcard-kicker">Haimirex Delay</span>
         <h3>Thảo dược &amp; Kéo dài</h3>
@@ -528,13 +550,12 @@
 <section class="section" id="ingredients">
   <div class="wrap">
     <div class="lines-head reveal">
-      <span class="eyebrow">Thành phần</span>
-      <h2>Từng hoạt chất, một vai trò rõ ràng</h2>
+      <h2>Công thức chọn lọc, an toàn khi sử dụng</h2>
     </div>
     <div class="irow irow-nuoc reveal">
-      <div class="irow-media"><img src="__IMG_INGR_NUOC_INFO__" alt="Thành phần Haimirex Gốc Nước: Glycerin, Gluconolactone, Lactic Acid, HEC"></div>
+      <div class="irow-media"><img src="__IMG_INGR_NUOC_INFO_2026__" alt="Thành phần Haimirex Gốc Nước: Glycerin, Gluconolactone, Lactic Acid, HEC"></div>
       <div class="irow-content">
-        <span class="eyebrow">Haimirex Gốc Nước</span>
+        <span class="irow-kicker">Haimirex Gốc Nước</span>
         <h3>Dịu nhẹ, an toàn cho da nhạy cảm</h3>
         <p class="irow-desc">Công thức tối giản, tập trung cấp ẩm và cân bằng, không Paraben, không Silicone, không nền dầu.</p>
       </div>
@@ -542,20 +563,19 @@
     <div class="irow irow-delay reverse reveal">
       <div class="irow-media"><img src="__IMG_INGR_DELAY_INFO__" alt="Thành phần Haimirex Delay: Bạc Hà, Gừng, Nhân Sâm, Mật Nhân, Đinh Lăng, Hệ khóa ẩm HA"></div>
       <div class="irow-content">
-        <span class="eyebrow">Haimirex Delay</span>
-        <h3>Thảo dược cho sự bền bỉ tự nhiên</h3>
-        <p class="irow-desc">Tổ hợp thảo dược quen thuộc trong y học cổ truyền, kết hợp để hỗ trợ bền bỉ mà không gây tê.</p>
+        <span class="irow-kicker">Haimirex Delay</span>
+        <h3>Tổ hợp thảo dược, tăng cường sức mạnh nam giới</h3>
+        <p class="irow-desc">Các thảo dược quen thuộc trong y học cổ truyền được bổ sung vào sản phẩm, hỗ trợ cuộc yêu kéo dài.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= COMPARISON ================= -->
-<section class="section">
+<section class="section" style="background:var(--surface);">
   <div class="wrap">
     <div class="cmp-head reveal">
-      <span class="eyebrow">So sánh khách quan</span>
-      <h2>Haimirex Delay so với gel gây tê phổ biến</h2>
+      <h2><span class="cmp-title-brand">Haimirex Delay</span><span class="cmp-title-sub">Lựa chọn khác biệt so với gel gây tê thông thường</span></h2>
     </div>
     <div class="cmp-layout">
     <div class="cmp-media reveal"><img src="__IMG_CMP_COUPLE_HAPPY__" alt="Cặp đôi hạnh phúc, hài lòng cùng bộ đôi Haimirex"></div>
@@ -582,7 +602,6 @@
   <div class="wrap">
     <div class="usage-head reveal">
       <h2>Hướng dẫn sử dụng</h2>
-      <span class="eyebrow">Đơn giản · An toàn</span>
     </div>
     <div class="usage-single reveal">
       <img src="__IMG_USAGE_INFO__" alt="Hướng dẫn sử dụng Haimirex Gốc Nước và Haimirex Delay, 4 bước">
@@ -591,10 +610,9 @@
 </section>
 
 <!-- ================= BRAND ================= -->
-<section class="section">
+<section class="section" style="background:var(--surface);">
   <div class="wrap">
     <div class="brand-band reveal">
-      <span class="eyebrow">Về thương hiệu</span>
       <h2>Haimirex thuộc hệ sinh thái Better Me</h2>
       <div class="brand-facts">
         <span class="fact">Công ty Cổ phần Better Me · TP.HCM</span>
@@ -602,7 +620,7 @@
         <span class="fact">Sản phẩm đầy đủ kiểm định &amp; chứng nhận</span>
         <span class="fact">Bán trực tiếp trên các gian hàng điện tử: Shopee, TikTok Shop, Lazada</span>
       </div>
-      <p class="brand-quote">"Thân mật không chỉ là khoảnh khắc, mà là cảm xúc cần được nâng niu."</p>
+      <p class="brand-quote">"Để mỗi cuộc yêu là một lần kết nối trọn vẹn"</p>
     </div>
   </div>
 
@@ -636,11 +654,29 @@
   </div>
 </section>
 
+<!-- ================= SHIPPING / PRIVACY ================= -->
+<section class="section shipping">
+  <div class="wrap">
+    <div class="shipping-layout">
+      <div class="shipping-media reveal">
+        <img src="__IMG_SHIPPING_BOX_2026__" alt="Đóng gói kín đáo, che tên sản phẩm 100%" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div class="shipping-content reveal">
+        <h2>Giao hàng nhanh, kín đáo, riêng tư</h2>
+        <ul class="shipping-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Giao hàng kín đáo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Che tên sản phẩm 100%</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Bảo mật thông tin khách hàng</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PRICING ================= -->
 <section class="section" id="pricing" style="background:var(--surface-2);">
   <div class="wrap">
     <div class="pricing-head reveal">
-      <span class="eyebrow">Chọn combo phù hợp</span>
       <h2>Bảng giá &amp; ưu đãi</h2>
     </div>
     <div class="pricing-grid">
@@ -687,10 +723,9 @@
 </section>
 
 <!-- ================= FAQ ================= -->
-<section class="section" id="faq">
+<section class="section" id="faq" style="background:var(--surface);">
   <div class="wrap">
     <div class="faq-head reveal">
-      <span class="eyebrow">Giải đáp nhanh</span>
       <h2>Câu hỏi thường gặp</h2>
     </div>
     <div class="faq-list">
@@ -711,9 +746,9 @@
     <div class="final-trust">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke-linejoin="round"/></svg>Che tên sản phẩm 100%</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Bảo mật thông tin khách hàng tuyệt đối</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 8h16M4 8l1.5 11a2 2 0 0 0 2 1.8h9a2 2 0 0 0 2-1.8L20 8M9 8V6a3 3 0 0 1 6 0v2" stroke-linecap="round" stroke-linejoin="round"/></svg>Giao hàng kín đáo, đóng gói trung tính</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 8h16M4 8l1.5 11a2 2 0 0 0 2 1.8h9a2 2 0 0 0 2-1.8L20 8M9 8V6a3 3 0 0 1 6 0v2" stroke-linecap="round" stroke-linejoin="round"/></svg>Bao bì ngụy trang hoàn hảo</span>
     </div>
-    <p class="final-contact">Hỗ trợ tư vấn riêng tư qua Zalo / Hotline &nbsp;·&nbsp; <em>0965070039</em></p>
+    <p class="final-contact">Hỗ trợ tư vấn riêng tư qua Zalo / Hotline &nbsp;·&nbsp; <em><a href="tel:0965070039" style="color:inherit; text-decoration:underline;">096 507 00 39</a></em></p>
   </div>
 </section>
 
@@ -765,9 +800,23 @@
 <!-- ================= FOOTER ================= -->
 <footer class="site">
   <div class="wrap">
-    <div class="foot-inner">
-      <div class="foot-brand">Haimirex</div>
-      <div class="foot-meta">Gel bôi trơn Haimirex giúp cấp ẩm, hỗ trợ cuộc yêu bền bỉ, kéo dài tự nhiên. Thuộc Công ty Cổ phần Better Me, 28B Mạc Cửu, P. Chợ Lớn, TP.HCM.<br>Hotline / Zalo tư vấn: <a href="tel:0965070039" class="foot-phone">096 507 00 39</a></div>
+    <div class="foot-grid">
+      <div class="foot-col foot-col-brand">
+        <div class="foot-brand">Haimirex</div>
+        <p class="foot-desc">Gel bôi trơn Haimirex giúp cấp ẩm, hỗ trợ cuộc yêu bền bỉ, kéo dài tự nhiên.</p>
+      </div>
+      <div class="foot-col">
+        <div class="foot-heading">Liên kết nhanh</div>
+        <a href="#products">Sản phẩm</a>
+        <a href="#ingredients">Thành phần</a>
+        <a href="#pricing">Bảng giá</a>
+        <a href="#faq">Hỏi đáp</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-heading">Liên hệ</div>
+        <p>Công ty Cổ phần Better Me<br>28B Mạc Cửu, P. Chợ Lớn, TP.HCM</p>
+        <p>Hotline / Zalo: <a href="tel:0965070039" class="foot-phone">096 507 00 39</a></p>
+      </div>
     </div>
     <p class="foot-legal">Sản phẩm chỉ dùng ngoài da. Tránh tiếp xúc với mắt hoặc vùng da có vết thương hở. Ngừng sử dụng nếu có dấu hiệu kích ứng. Không phải biện pháp tránh thai, không chứa chất diệt tinh trùng. Thông tin trên trang mang tính tham khảo, không thay thế tư vấn y tế. © 2026 Better Me.</p>
   </div>
